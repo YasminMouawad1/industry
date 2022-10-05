@@ -1,5 +1,4 @@
-<!-- ========== Left Sidebar Start ========== -->
-
+ 
 <ng-template #contentTemplate>
   <!--- Sidemenu -->
   <div id="sidebar-menu">
@@ -12,6 +11,33 @@
           <a
             routerLinkActive="active"
             class="side-nav-link-ref"
+            routerLink="employees-List"
+          >
+            <i class="fas fa-user-check"></i>
+            <span>
+              الموظفين
+            </span>
+          </a>
+        </li> 
+
+        <li>
+          <a
+            routerLinkActive="active"
+            class="side-nav-link-ref"
+            routerLink="store-List"
+          >
+          <i class="fas fa-cog"></i>
+            <span>
+              المخزن
+            </span>
+          </a>
+        </li> 
+
+
+        <!-- <li>
+          <a
+            routerLinkActive="active"
+            class="side-nav-link-ref"
             routerLink="users-approval"
           >
             <i class="fas fa-user-check"></i>
@@ -20,58 +46,6 @@
             </span>
           </a>
         </li> 
-        <li>
-          <a 
-            routerLinkActive="active"
-            class="side-nav-link-ref"  
-            routerLink="user-rejected" 
-            data-bs-toggle="collapse" data-bs-target="#rejectRequest"
-           >
-              <i class="fas fa-user-times"></i>
-              <span> {{ "SIDEMNUE.LINK6" | translate }} </span>
-       
-      </a>
-      </li>
-      <ul class="collapse sun-menu" id="rejectRequest">
-        <li>
-          <a
-            routerLinkActive="sub-active"
-            class="side-nav-link-ref"
-            routerLink="user-rejected"
-          >
-          <i class="fas fa-chevron-right"></i>
-            <span>
-              {{ "SIDEMNUE.LINK2" | translate }}
-            </span>
-          </a>
-        </li>
-        <li>
-          <a
-            routerLinkActive="sub-active"
-            class="side-nav-link-ref"
-            routerLink="user-rejected/permanent-rejected"
-          >
-          <i class="fas fa-chevron-right"></i>
-            <span>
-              {{ "SIDEMNUE.LINK5" | translate }}
-            </span>
-          </a>
-        </li>
-    </ul>
-
-        <li>
-          <a
-            routerLinkActive="active"
-            class="side-nav-link-ref"
-            routerLink="limit-review" 
-          >
-            <i class="fas fa-money-check-alt"></i>
-            <span>
-              {{ "SIDEMNUE.LINK3" | translate }}
-            </span>
-          </a>
-        </li>
-      
 
         <li>
           <a
@@ -124,50 +98,8 @@
             </a>
           </li>
       </ul>
-        <!-- <li class="menu-title">Administrator</li>
-
-        <li>
-          <a
-            routerlinkactive="active"
-            class="side-nav-link-ref"
-            routerLink="clubIds"
-          >
-            <i class="bx bx-file"></i>
-            <span> Club Ids</span>
-          </a>
-        </li>
-        <li>
-          <a
-            routerlinkactive="active"
-            class="side-nav-link-ref"
-            routerLink="carBrand"
-          >
-            <i class="bx bx-file"></i>
-            <span> CarBrand</span>
-          </a>
-        </li>
-
-        <li>
-          <a
-            routerlinkactive="active"
-            class="side-nav-link-ref"
-            routerLink="governorates"
-          >
-            <i class="bx bx-file"></i>
-            <span> Governorates</span>
-          </a>
-        </li>
-        <li>
-          <a
-            routerlinkactive="active"
-            class="side-nav-link-ref"
-            routerLink="employmentTypes"
-          >
-            <i class="bx bx-file"></i>
-            <span> Employment Types </span>
-          </a>
-        </li> -->
-      </ng-container>
+     -->
+    </ng-container>
     </ul>
   </div>
 </ng-template>

@@ -27,6 +27,7 @@ export class SystemConfigurationProfessionsComponent implements OnInit {
     this._spinnerService.requestStarted();
      this.getAllProfessionList();
     this._spinnerService.requestEnded();
+    
     this.configurationProfession = new FormGroup({
       name:new FormControl('',Validators.required),
       code:new FormControl('',Validators.required),

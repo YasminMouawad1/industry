@@ -72,7 +72,7 @@
                     {{profession.isActive ? 'Dactive' : 'Active'}}</button>
 
                     &nbsp;
-                    <button (click)="deleteSystemConfiguration(profession) " class="{{profession.isDeleted ? 'btn btn-success btn-rounded' : 'btn btn-danger btn-rounded'}}">
+                    <button (click)="deleteSystemConfiguration(profession)" class="{{profession.isDeleted ? 'btn btn-success btn-rounded' : 'btn btn-danger btn-rounded'}}">
                       <i class="{{profession.isDeleted ? 'fas fa-undo-alt' : 'fas fa-trash-alt'}}"></i>
                       {{profession.isDeleted ? 'Restore' : 'Delete'}}</button>
 

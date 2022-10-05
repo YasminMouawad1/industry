@@ -130,13 +130,7 @@ export class UserItemComponent implements OnInit {
        
     })
 
-
-
-    // setTimeout(()=>{
-    //   this.loading = false;
-    // }, 6000);
-
-
+ 
   }
 
 

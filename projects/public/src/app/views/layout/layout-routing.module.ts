@@ -1,8 +1,5 @@
 import { NgModule } from '@angular/core';
-import { RouterModule, Routes } from '@angular/router';
-import { AuthGuard } from '../../core/services/guard/auth-guard.service';
-// import { DynamicFormComponent } from '../reusable/dynamic-form/dynamic-form.component';
-// import { WizardComponent } from '../reusable/wizard/wizard.component';
+import { RouterModule, Routes } from '@angular/router'; 
 import { LayoutComponent } from './layout.component';
 
 const routes: Routes = [{
@@ -10,24 +7,12 @@ const routes: Routes = [{
     {
       path: "",
       pathMatch: "full",
-      redirectTo: "users-approval"
+      redirectTo: "employees-List"
     },
-    { path: 'users-approval', loadChildren: () => import('./users-approval/users-approval.module').then(m => m.UsersApprovalModule) },
-    { path: 'user-rejected', loadChildren: () => import('./user-rejected/users-reject.module').then(m => m.UsersRejectModule) },
-    { path: 'limit-review', loadChildren: () => import('./limit-review/limit-review.module').then(m => m.LimitReviewModule) },
+    { path: 'employees-List', loadChildren: () => import('./employees/employees.module').then(m => m.EmployeesModule) },  
+    { path: 'store-List', loadChildren: () => import('./store/store.module').then(m => m.StoreModule) },  
+    { path: 'users-approval', loadChildren: () => import('./users-approval/users-approval.module').then(m => m.UsersApprovalModule) },  
     { path: 'system-configuration', loadChildren: () => import('./system-configuration/system-configuration.module').then(m => m.SystemConfigurationModule) },
-
-
-    // { path: 'lockUps', loadChildren: () => import('./look-ups/look-ups.module').then(m => m.LookUpsModule) },
-    // { path: 'carBrand', loadChildren: () => import('./lookups/car-brand/car-brand.module').then(m => m.CarBrandModule) },
-    // { path: 'governorates', loadChildren: () => import('./lookups/governorates/governorates.module').then(m => m.GovernoratesModule) },
-    // { path: 'employmentTypes', loadChildren: () => import('./lookups/employment-types/employment-types.module').then(m => m.EmploymentTypesModule) },
-    // { path: 'clubIds', loadChildren: () => import('./lookups/club-ids/club-ids.module').then(m => m.ClubIdsModule) },
-
-    // { path: 'question-bank', component: QuestionBankComponent },
-    // { path: 'wizard', component: WizardComponent },
-    // { path: 'dynamic-form', component: DynamicFormComponent },
-
   ]
 },
 ];

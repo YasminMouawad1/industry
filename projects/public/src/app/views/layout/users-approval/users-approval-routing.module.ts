@@ -1,8 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { UserItemComponent } from './user-item/user-item.component';
-import { UsersApprovalComponent } from './users-approval.component';
-import { UsersListRejectedComponent } from './users-list-rejected/users-list-rejected.component';
+import { UsersApprovalComponent } from './users-approval.component'; 
 import { UsersListComponent } from './users-list/users-list.component';
 
 const routes: Routes = [

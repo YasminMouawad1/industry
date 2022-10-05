@@ -1,0 +1,227 @@
+<div class="row">
+    <div class="col-lg-12">
+      <div class="card">
+        <div class="card-body">
+        
+         <button class="btn btn-primary mb-4" data-bs-toggle="modal" data-bs-target="#addStore">إضافة مخزون</button>   
+          <div class="table-responsive">
+            <p *ngIf="!showTable" class="alert alert-warning text-center">data is empty</p>
+            <table class="table align-middle table-nowrap table-hover">
+              <thead class="table-light">
+                <tr>
+                  <th scope="col" style="width: 70px">#</th>
+                  <th scope="col">
+                    رقم المخزون
+                  </th>
+                  <th scope="col">
+                     نوع المخزون
+                  </th>
+                  <th scope="col">
+                   امين المخزن
+                  </th>
+                  <th scope="col">
+                    تاثير
+                  </th>
+                  
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let user of usersList | paginate: { itemsPerPage: numberRows, currentPage: currentPage }">
+                  <td>
+                    <div class="avatar-xs">
+                      <span class="avatar-title rounded-circle">
+                        <img [src]="" alt="" />
+                      </span>
+                    </div>
+                  </td>
+                  <td>205</td> 
+                  <td> سيارة </td> 
+                  <td> عمرو ابراهيم محمود </td>
+                  <td>
+                    <ul class="list-inline font-size-20 contact-links mb-0">
+                      <li class="list-inline-item px-2">
+                        <button data-bs-toggle="modal" data-bs-target="#viewStore"
+                          class="btn btn-primary" (click)="showStore(user)"> عرض
+                        </button>
+                      </li>
+                      <li class="list-inline-item px-2">
+                        <button data-bs-toggle="modal" data-bs-target="#editStore"
+                          class="btn btn-secondary"> تعديل
+                        </button>
+                      </li>
+                      <li class="list-inline-item px-2">
+                         <button (click)="deleteStore(user)" class="btn btn-danger">حذف</button>
+                      </li>
+                    </ul>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+  
+          <div class="float-end test">
+              <pagination-controls class="my-pagination" (pageChange)="currentPage = $event" previousLabel="" nextLabel=""></pagination-controls>
+           </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  
+<!-------add Modal ------------> 
+<div class="modal fade" id="addStore" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h3 class="modal-title" id="exampleModalLabel"><i class="fas fa-plus"></i>  إضافة مخزون</h3>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <form [formGroup]="newStore" (ngSubmit)="addStore()">
+          <div class="mb-3 row">
+            <label for="id" class="col-sm-3 col-form-label">رقم المخزون</label>
+            <div class="col-sm-9">
+              <input [class.is-valid]="newStore.get('id')?.status=='VALID'"
+                type="text" formControlName="id" class="form-control" id="id">
+                <div *ngIf="newStore.get('id')?.errors && newStore.get('id')?.touched" class="invalid-feedback">
+                  <span *ngIf="newStore.get('id')?.getError('required')">
+                  this is required!</span>  
+             </div>
+            </div>
+          </div>
+
+          <div class="mb-3 row">
+            <label for="type" class="col-sm-3 col-form-label">نوع المخزون</label>
+            <div class="col-sm-9">
+              <select [class.is-valid]="newStore.get('type')?.status=='VALID'"
+              id="type" class="form-select" placeholder="Select Active or Deavtive" formControlName="type">    
+                   <option value="" selected>نوع المخزون</option>
+                   <option [ngValue]="true"> خلاط </option>
+                   <option [ngValue]="false"> سيارة </option>
+              </select>
+              <div *ngIf="newStore.get('type')?.errors && newStore.get('type')?.touched"  class="invalid-feedback">
+                <span  *ngIf="newStore.get('type')?.getError('required')">{{ "USERITEMINFO.Required" | translate }}</span>  
+             </div>
+            </div>
+          </div>
+
+          <div class="mb-3 row">
+            <label for="empName" class="col-sm-3 col-form-label"> أمين المخزن </label>
+            <div class="col-sm-9">
+              <input [class.is-valid]="newStore.get('empName')?.status=='VALID'"
+              type="text" formControlName="empName" class="form-control" id="empName">
+              <div *ngIf="newStore.get('empName')?.errors && newStore.get('empName')?.touched" class="invalid-feedback">
+                <span  *ngIf="newStore.get('empName')?.getError('required')">this is required</span>  
+             </div>
+            </div>
+          </div>
+   
+          <div class="text-end">
+            <button [disabled]="newStore.invalid" class="btn btn-success mx-2">{{ "CONFIGPROFESSIONS.add" | translate }}</button>
+            <button class="btn btn-secondary" data-bs-dismiss="modal">{{ "CONFIGPROFESSIONS.cancel" | translate }}</button>
+          </div>
+         </form> 
+        </div>
+      </div>
+    </div>
+</div>
+ 
+
+<!-------edit Modal ------------> 
+<div class="modal fade" id="editStore" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3 class="modal-title" id="exampleModalLabel"><i class="fas fa-edit"></i>  تعديل مخزون</h3>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form [formGroup]="editStore" (ngSubmit)="updateStore()">
+        <div class="mb-3 row">
+          <label for="id" class="col-sm-3 col-form-label">رقم المخزون</label>
+          <div class="col-sm-9">
+            <input [class.is-valid]="editStore.get('id')?.status=='VALID'"
+              type="text" formControlName="id" class="form-control" id="id">
+              <div *ngIf="editStore.get('id')?.errors && editStore.get('id')?.touched" class="invalid-feedback">
+                <span *ngIf="editStore.get('id')?.getError('required')">
+                this is required!</span>  
+           </div>
+          </div>
+        </div>
+
+        <div class="mb-3 row">
+          <label for="type" class="col-sm-3 col-form-label">نوع المخزون</label>
+          <div class="col-sm-9">
+            <select [class.is-valid]="editStore.get('type')?.status=='VALID'"
+            id="type" class="form-select" placeholder="Select Active or Deavtive" formControlName="type">    
+                 <option value="" selected>نوع المخزون</option>
+                 <option [ngValue]="true"> خلاط </option>
+                 <option [ngValue]="false"> سيارة </option>
+            </select>
+            <div *ngIf="editStore.get('type')?.errors && editStore.get('type')?.touched"  class="invalid-feedback">
+              <span  *ngIf="editStore.get('type')?.getError('required')">{{ "USERITEMINFO.Required" | translate }}</span>  
+           </div>
+          </div>
+        </div>
+
+        <div class="mb-3 row">
+          <label for="empName" class="col-sm-3 col-form-label"> أمين المخزن </label>
+          <div class="col-sm-9">
+            <input [class.is-valid]="editStore.get('empName')?.status=='VALID'"
+            type="text" formControlName="empName" class="form-control" id="empName">
+            <div *ngIf="editStore.get('empName')?.errors && editStore.get('empName')?.touched" class="invalid-feedback">
+              <span  *ngIf="editStore.get('empName')?.getError('required')">this is required</span>  
+           </div>
+          </div>
+        </div>
+ 
+        <div class="text-end">
+          <button [disabled]="editStore.invalid" class="btn btn-success mx-2">تعديل</button>
+          <button class="btn btn-secondary" data-bs-dismiss="modal">{{ "CONFIGPROFESSIONS.cancel" | translate }}</button>
+        </div>
+       </form> 
+      </div>
+    </div>
+  </div>
+</div>
+   
+<!-------view Modal ------------> 
+<div class="modal fade" id="viewStore" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header d-block">
+        <h3 class="text-center" id="exampleModalLabel">عرض مخزون</h3> 
+      </div>
+
+      <div class="modal-body"> 
+
+        <div class="mb-3 row">
+          <label for="id" class="col-sm-3 col-form-label">رقم المخزون</label>
+          <div class="col-sm-9">
+             <p>205 </p>
+           </div>
+        </div>
+    
+        <div class="mb-3 row">
+          <label for="type" class="col-sm-3 col-form-label">نوع المخزون</label>
+          <div class="col-sm-9">
+             <p>سيارة </p>
+          </div>
+        </div>
+
+        <div class="mb-3 row">
+          <label for="empName" class="col-sm-3 col-form-label"> أمين المخزن </label>
+          <div class="col-sm-9">
+             <p>  عمرو ابراهيم محمود </p>
+          </div>
+        </div>
+ 
+        <div class="text-end"> 
+          <button class="btn btn-secondary w-100" data-bs-dismiss="modal">إغلاق</button>
+        </div>
+      
+    </div>
+  </div>
+</div>
+   

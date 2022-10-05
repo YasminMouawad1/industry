@@ -1,0 +1,30 @@
+.profile{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.profile img{
+    border-radius: 50%;
+    width: 150px;
+}
+
+.profile h2{
+    margin-top: 12px;
+}
+
+.profile #title{
+    background-color: #7f7c7c;
+    padding: 6px 14px;
+    border-radius: 10px;
+    color: #fff;
+}
+
+.profile button{
+    margin-right: 5px;
+}
+
+.profile #btns{
+    margin-top: 2rem;
+}

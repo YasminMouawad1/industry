@@ -1,0 +1,225 @@
+<div class="row">
+    <div class="col-lg-12">
+      <div class="card">
+        <div class="card-body">
+        
+         <button class="btn btn-primary mb-4" data-bs-toggle="modal" data-bs-target="#addEmployee">إضافة موظف</button>   
+          <div class="table-responsive">
+            <p *ngIf="!showTable" class="alert alert-warning text-center">data is empty</p>
+            <table class="table align-middle table-nowrap table-hover">
+              <thead class="table-light">
+                <tr>
+                  <th scope="col" style="width: 70px">#</th>
+                  <th scope="col">
+                    الاسم
+                  </th>
+                  <th scope="col">
+                    رقم الهاتف
+                  </th>
+                  <th scope="col">
+                   العنوان
+                  </th>
+                  <th scope="col">
+                    الوظيفة
+                  </th>
+                  
+                  <th scope="col">
+                    {{ "USERlISTTABLE.COL7" | translate }}
+                  </th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let user of usersList | paginate: { itemsPerPage: numberRows, currentPage: currentPage }">
+                  <td>
+                    <div class="avatar-xs">
+                      <span class="avatar-title rounded-circle">
+                        <img [src]="" alt="" />
+                      </span>
+                    </div>
+                  </td>
+                  <td>{{user.name}}</td> 
+                  <td>
+                    {{ user.mobileNumber }}
+                  </td> 
+                  <td
+                    class="text-truncate"
+                    style="max-width: 150px"
+                    data-bs-toggle="tooltip"
+                    data-bs-placement="top"
+                    title="  {{ user.homeAddress }}"
+                  >
+                    {{ user.homeAddress }}
+                  </td>
+                  <td>{{ user.jobTitle }}</td>
+                  <td>
+                    <ul class="list-inline font-size-20 contact-links mb-0">
+                      <li class="list-inline-item px-2">
+                        <a
+                          class="action-icon text-secondary"
+                          routerLink="employee-item/{{ user.mobileNumber }}"
+                          ngbTooltip="Profile"
+                          ><i class="mdi mdi-eye font-size-18" style="color: #2196f3;"></i
+                        ></a>
+                      </li>
+                      <li class="list-inline-item px-2">
+                        <button data-bs-toggle="modal" data-bs-target="#editEmployee"
+                          class="action-icon text-secondary" 
+                        ><i class="mdi mdi-pen font-size-18" style="color: #009688;"></i>
+                        </button>
+                      </li>
+                      <li class="list-inline-item px-2">
+                        <a
+                          class="action-icon text-secondary" 
+                          (click)="deleteEmployee(user)"
+                        ><i class="mdi mdi-delete font-size-18" style="color: #d30808;"></i>
+                        </a>
+                      </li>
+                    </ul>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+  
+          <div class="float-end test">
+              <pagination-controls class="my-pagination" (pageChange)="currentPage = $event" previousLabel="" nextLabel=""></pagination-controls>
+           </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  
+<!-------add Modal ------------> 
+<div class="modal fade" id="addEmployee" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel"><i class="fas fa-plus"></i>  إضافة موظف</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <form [formGroup]="newEmployee" (ngSubmit)="addEmployee()">
+          <div class="mb-3 row">
+            <label for="name" class="col-sm-3 col-form-label">الاسم</label>
+            <div class="col-sm-9">
+              <input [class.is-valid]="newEmployee.get('name')?.status=='VALID'"
+                type="text" formControlName="name" class="form-control" id="name">
+                <div *ngIf="newEmployee.get('name')?.errors && newEmployee.get('name')?.touched" class="invalid-feedback">
+                  <span *ngIf="newEmployee.get('name')?.getError('required')">
+                  this is required!</span>  
+             </div>
+            </div>
+          </div>
+
+          <div class="mb-3 row">
+            <label for="phone" class="col-sm-3 col-form-label">رقم الهاتف</label>
+            <div class="col-sm-9">
+              <input [class.is-valid]="newEmployee.get('phone')?.status=='VALID'"
+              type="text" formControlName="phone" class="form-control" id="phone">
+              <div *ngIf="newEmployee.get('phone')?.errors && newEmployee.get('phone')?.touched" class="invalid-feedback">
+                <span  *ngIf="newEmployee.get('phone')?.getError('required')">{{ "USERITEMINFO.Required" | translate }}</span>  
+             </div>
+            </div>
+          </div>
+
+          <div class="mb-3 row">
+            <label for="jobTitle" class="col-sm-3 col-form-label"> الوظيفة </label>
+            <div class="col-sm-9">
+              <input [class.is-valid]="newEmployee.get('jobTitle')?.status=='VALID'"
+              type="text" formControlName="jobTitle" class="form-control" id="jobTitle">
+              <div *ngIf="newEmployee.get('jobTitle')?.errors && newEmployee.get('jobTitle')?.touched" class="invalid-feedback">
+                <span  *ngIf="newEmployee.get('jobTitle')?.getError('required')">this is required</span>  
+             </div>
+            </div>
+          </div>
+
+          <div class="mb-3 row">
+            <label for="address" class="col-sm-3 col-form-label"> العنوان </label>
+            <div class="col-sm-9">
+              <textarea [class.is-valid]="newEmployee.get('address')?.status=='VALID'"
+              type="text" formControlName="address" class="form-control" id="address"></textarea>
+              <div *ngIf="newEmployee.get('address')?.errors && newEmployee.get('address')?.touched" class="invalid-feedback">
+                <span  *ngIf="newEmployee.get('address')?.getError('required')">{{ "USERITEMINFO.Required" | translate }}</span>  
+             </div>
+            </div>
+          </div>
+   
+          <div class="text-end">
+            <button [disabled]="newEmployee.invalid" class="btn btn-success mx-2">{{ "CONFIGPROFESSIONS.add" | translate }}</button>
+            <button class="btn btn-secondary" data-bs-dismiss="modal">{{ "CONFIGPROFESSIONS.cancel" | translate }}</button>
+          </div>
+         </form> 
+        </div>
+      </div>
+    </div>
+</div>
+
+<!-------edit Modal ------------> 
+<div class="modal fade" id="editEmployee" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel"><i class="fas fa-plus"></i>  تعديل موظف</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <form [formGroup]="editEmployee" (ngSubmit)="addEmployee()">
+          <div class="mb-3 row">
+            <label for="name" class="col-sm-3 col-form-label">الاسم</label>
+            <div class="col-sm-9">
+              <input [class.is-valid]="editEmployee.get('name')?.status=='VALID'"
+                type="text" formControlName="name" class="form-control" id="name">
+                <div *ngIf="editEmployee.get('name')?.errors && editEmployee.get('name')?.touched" class="invalid-feedback">
+                  <span *ngIf="editEmployee.get('name')?.getError('required')">
+                  this is required!</span>  
+             </div>
+            </div>
+          </div>
+
+          <div class="mb-3 row">
+            <label for="phone" class="col-sm-3 col-form-label">رقم الهاتف</label>
+            <div class="col-sm-9">
+              <input [class.is-valid]="editEmployee.get('phone')?.status=='VALID'"
+              type="text" formControlName="phone" class="form-control" id="phone">
+              <div *ngIf="editEmployee.get('phone')?.errors && editEmployee.get('phone')?.touched" class="invalid-feedback">
+                <span  *ngIf="editEmployee.get('phone')?.getError('required')">{{ "USERITEMINFO.Required" | translate }}</span>  
+             </div>
+            </div>
+          </div>
+
+          <div class="mb-3 row">
+            <label for="jobTitle" class="col-sm-3 col-form-label"> الوظيفة </label>
+            <div class="col-sm-9">
+              <input [class.is-valid]="editEmployee.get('jobTitle')?.status=='VALID'"
+              type="text" formControlName="jobTitle" class="form-control" id="jobTitle">
+              <div *ngIf="editEmployee.get('jobTitle')?.errors && editEmployee.get('jobTitle')?.touched" class="invalid-feedback">
+                <span  *ngIf="editEmployee.get('jobTitle')?.getError('required')">this is required</span>  
+             </div>
+            </div>
+          </div>
+
+          <div class="mb-3 row">
+            <label for="address" class="col-sm-3 col-form-label"> العنوان </label>
+            <div class="col-sm-9">
+              <textarea [class.is-valid]="editEmployee.get('address')?.status=='VALID'"
+              type="text" formControlName="address" class="form-control" id="address"></textarea>
+              <div *ngIf="editEmployee.get('address')?.errors && editEmployee.get('address')?.touched" class="invalid-feedback">
+                <span  *ngIf="editEmployee.get('address')?.getError('required')">{{ "USERITEMINFO.Required" | translate }}</span>  
+             </div>
+            </div>
+          </div>
+   
+          <div class="text-end">
+            <button [disabled]="editEmployee.invalid" class="btn btn-success mx-2">{{ "CONFIGPROFESSIONS.add" | translate }}</button>
+            <button class="btn btn-secondary" data-bs-dismiss="modal">{{ "CONFIGPROFESSIONS.cancel" | translate }}</button>
+          </div>
+         </form> 
+        </div>
+      </div>
+    </div>
+</div>
+  
+   
+   
