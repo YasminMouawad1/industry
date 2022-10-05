@@ -32,17 +32,16 @@
             </span>
           </a>
         </li> 
-
-
-        <!-- <li>
+ 
+        <li>
           <a
             routerLinkActive="active"
             class="side-nav-link-ref"
-            routerLink="users-approval"
+            routerLink="vehicles-List"
           >
-            <i class="fas fa-user-check"></i>
+          <i class="fas fa-database"></i>
             <span>
-              {{ "SIDEMNUE.LINK1" | translate }}
+              المركبات
             </span>
           </a>
         </li> 
@@ -51,54 +50,29 @@
           <a
             routerLinkActive="active"
             class="side-nav-link-ref"
-            routerLink="system-configuration"
-            data-bs-toggle="collapse" data-bs-target="#systemConfig"
+            routerLink="maintenance-List"
           >
-            <i class="fas fa-cog"></i>
+          <i class="fas fa-wrench"></i>
             <span>
-              {{ "SIDEMNUE.LINK4" | translate }}
+              صيانة
             </span>
           </a>
-        </li>
-        <ul class="collapse sun-menu" id="systemConfig">
-          <li>
-            <a
-              routerLinkActive="sub-active"
-              class="side-nav-link-ref"
-              routerLink="system-configuration/system-core-configuration"
-            >
-            <i class="fas fa-chevron-right"></i>
-              <span>
-                {{ "SIDEMNUE.LINK9" | translate }}
-              </span>
-            </a>
-          </li>
-          <li>
-            <a
-              routerLinkActive="sub-active"
-              class="side-nav-link-ref"
-              routerLink="system-configuration/system-configuration-professions"
-            >
-            <i class="fas fa-chevron-right"></i>
-              <span>
-                {{ "SIDEMNUE.LINK8" | translate }}
-              </span>
-            </a>
-          </li>
-          <li>
-            <a
-              routerLinkActive="sub-active"
-              class="side-nav-link-ref"
-              routerLink="system-configuration/system-rejection-reasons"
-            >
-            <i class="fas fa-chevron-right"></i>
-              <span>
-                {{ "SIDEMNUE.LINK7" | translate }}
-              </span>
-            </a>
-          </li>
-      </ul>
-     -->
+        </li> 
+
+        <li>
+          <a
+            routerLinkActive="active"
+            class="side-nav-link-ref"
+            routerLink="reports-List"
+          >
+          <i class="fas fa-file"></i>
+            <span>
+              تقارير
+            </span>
+          </a>
+        </li> 
+
+
     </ng-container>
     </ul>
   </div>

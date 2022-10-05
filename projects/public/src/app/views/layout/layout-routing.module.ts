@@ -11,8 +11,9 @@ const routes: Routes = [{
     },
     { path: 'employees-List', loadChildren: () => import('./employees/employees.module').then(m => m.EmployeesModule) },  
     { path: 'store-List', loadChildren: () => import('./store/store.module').then(m => m.StoreModule) },  
-    { path: 'users-approval', loadChildren: () => import('./users-approval/users-approval.module').then(m => m.UsersApprovalModule) },  
-    { path: 'system-configuration', loadChildren: () => import('./system-configuration/system-configuration.module').then(m => m.SystemConfigurationModule) },
+    { path: 'reports-List', loadChildren: () => import('./reports/reports.module').then(m => m.ReportsModule) },  
+    { path: 'vehicles-List', loadChildren: () => import('./vehicles/vehicles.module').then(m => m.VehiclesModule) },  
+    { path: 'maintenance-List', loadChildren: () => import('./maintenance/maintenance.module').then(m => m.MaintenanceModule) }
   ]
 },
 ];
