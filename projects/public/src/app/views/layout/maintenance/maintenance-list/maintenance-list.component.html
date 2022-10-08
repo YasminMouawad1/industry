@@ -1,9 +1,383 @@
 <div class="row">
-   <div class="col-lg-12">
-      <div class="card">
-        <div class="card-body"> 
-             <img src="assets/images/coming-soon.svg" alt="" />
-       </div>
+  <div class="col-lg-12">
+    <div class="card">
+      <div class="card-body">
+      
+       <button class="btn btn-primary mb-4" data-bs-toggle="modal" data-bs-target="#addStore">إضافة طلب</button>   
+        <div class="table-responsive">
+          <p *ngIf="!showTable" class="alert alert-warning text-center">data is empty</p>
+          <table class="table align-middle table-nowrap table-hover">
+            <thead class="table-light">
+              <tr>
+                <th scope="col" style="width: 70px">#</th>
+                <th scope="col">
+                  اسم المعدة
+                </th>
+                <th scope="col">
+                   رقم المعدة
+                </th>
+                <th scope="col">
+                  نوع المعده
+                </th>
+                <th scope="col">
+                  سائق المعده
+                </th>
+                <th scope="col">
+                   قطع الغيار المطلوبة
+                </th>
+                <th scope="col">
+                   حالة الطلب 
+               </th>
+               <th scope="col">
+                  صورة الطلب
+               </th>
+                <th scope="col">
+                  تاثير
+                </th>
+                
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let user of usersList | paginate: { itemsPerPage: numberRows, currentPage: currentPage }">
+                <td>
+                  <div class="avatar-xs">
+                    <span class="avatar-title rounded-circle">
+                      <img [src]="" alt="" />
+                    </span>
+                  </div>
+                </td>
+                <td>معدة 1</td> 
+                <td> 209 </td> 
+                <td> سيارة </td>
+                <td> عمرو ابراهيم محمود </td>
+                <td>القطع المطلوبة </td>
+                <td>ساري</td>
+                <td> <img alt=""  src="assets/images/small/img-7.jpg"> </td>
+                <td>
+                  <ul class="list-inline font-size-20 contact-links mb-0">
+                    <li class="list-inline-item px-2">
+                      <button data-bs-toggle="modal" data-bs-target="#viewMaintenance"
+                        class="btn btn-primary" (click)="showMaintenance(user)"> 
+                        <i class="mdi mdi-eye font-size-18" style="color: #2196f3;"></i>
+                      </button>
+                    </li>
+                    <li class="list-inline-item px-2">
+                      <button data-bs-toggle="modal" data-bs-target="#editMaintenance" class="btn btn-secondary"> 
+                        <i class="mdi mdi-pen font-size-18" style="color: #009688;"></i>
+                      </button>
+                    </li>
+                    <li class="list-inline-item px-2">
+                       <button (click)="deleteMaintenance(user)" class="btn btn-danger">
+                        <i class="mdi mdi-delete font-size-18" style="color: #d30808;"></i>
+                       </button>
+                    </li>
+                  </ul>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="float-end test">
+            <pagination-controls class="my-pagination" (pageChange)="currentPage = $event" previousLabel="" nextLabel=""></pagination-controls>
+         </div>
+      </div>
     </div>
   </div>
 </div>
+
+
+
+<!-------add Modal ------------> 
+<div class="modal fade" id="addStore" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3 class="modal-title" id="exampleModalLabel"><i class="fas fa-plus"></i>  إضافة طلب صيانة</h3>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form [formGroup]="newMaintenance" (ngSubmit)="addMaintenance()">
+        <div class="mb-3 row">
+          <label for="name" class="col-sm-3 col-form-label">اسم المعدة</label>
+          <div class="col-sm-9">
+            <input [class.is-valid]="newMaintenance.get('name')?.status=='VALID'"
+              type="text" formControlName="name" class="form-control" id="name">
+              <div *ngIf="newMaintenance.get('name')?.errors && newMaintenance.get('name')?.touched" class="invalid-feedback">
+                <span *ngIf="newMaintenance.get('name')?.getError('required')">
+                this is required!</span>  
+           </div>
+          </div>
+        </div>
+
+        <div class="mb-3 row">
+          <label for="id" class="col-sm-3 col-form-label">رقم المعدة</label>
+          <div class="col-sm-9">
+            <input [class.is-valid]="newMaintenance.get('id')?.status=='VALID'"
+              type="text" formControlName="id" class="form-control" id="id">
+              <div *ngIf="newMaintenance.get('id')?.errors && newMaintenance.get('id')?.touched" class="invalid-feedback">
+                <span *ngIf="newMaintenance.get('id')?.getError('required')">
+                this is required!</span>  
+              </div>
+         </div>
+        </div>
+
+        <div class="mb-3 row">
+          <label for="type" class="col-sm-3 col-form-label">نوع المعدة</label>
+          <div class="col-sm-9">
+            <select [class.is-valid]="newMaintenance.get('type')?.status=='VALID'"
+            id="type" class="form-select" placeholder="Select Active or Deavtive" formControlName="type">    
+                 <option value="" selected> -- اختار --</option>
+                 <option [ngValue]="true"> خلاط </option>
+                 <option [ngValue]="false"> سيارة </option>
+            </select>
+            <div *ngIf="newMaintenance.get('type')?.errors && newMaintenance.get('type')?.touched"  class="invalid-feedback">
+              <span  *ngIf="newMaintenance.get('type')?.getError('required')">{{ "USERITEMINFO.Required" | translate }}</span>  
+           </div>
+          </div>
+        </div>
+
+        <div class="mb-3 row">
+          <label for="driver" class="col-sm-3 col-form-label">  سائق المعدة </label>
+          <div class="col-sm-9">
+            <input [class.is-valid]="newMaintenance.get('driver')?.status=='VALID'"
+            type="text" formControlName="driver" class="form-control" id="driver">
+            <div *ngIf="newMaintenance.get('driver')?.errors && newMaintenance.get('driver')?.touched" class="invalid-feedback">
+              <span  *ngIf="newMaintenance.get('driver')?.getError('required')">this is required</span>  
+           </div>
+          </div>
+        </div>
+ 
+        <div class="mb-3 row">
+          <label for="spareParts" class="col-sm-3 col-form-label"> قطع الغيار المطلوبة </label>
+          <div class="col-sm-9">
+            <input [class.is-valid]="newMaintenance.get('spareParts')?.status=='VALID'"
+            type="text" formControlName="spareParts" class="form-control" id="spareParts">
+            <div *ngIf="newMaintenance.get('spareParts')?.errors && newMaintenance.get('spareParts')?.touched" class="invalid-feedback">
+              <span  *ngIf="newMaintenance.get('spareParts')?.getError('required')">this is required</span>  
+           </div>
+          </div>
+        </div>
+
+        <div class="mb-3 row">
+          <label for="statusOrder" class="col-sm-3 col-form-label"> حالة الطلب</label>
+          <div class="col-sm-9">
+            <select [class.is-valid]="newMaintenance.get('statusOrder')?.status=='VALID'"
+            id="statusOrder" class="form-select" placeholder="" formControlName="statusOrder">    
+                 <option value="" selected> -- اختار --</option>
+                 <option [ngValue]="true"> ساري </option>
+                 <option [ngValue]="false"> متوقف </option>
+            </select>
+            <div *ngIf="newMaintenance.get('statusOrder')?.errors && newMaintenance.get('statusOrder')?.touched"  class="invalid-feedback">
+              <span  *ngIf="newMaintenance.get('statusOrder')?.getError('required')">{{ "USERITEMINFO.Required" | translate }}</span>  
+           </div>
+          </div>
+        </div>
+
+        <div class="mb-3 row">
+          <label for="paperOrder" class="col-sm-3 col-form-label"> صورة الطلب</label>
+          <div class="col-sm-9">
+            <input type="file" id="paperOrder" formControlName="paperOrder">
+            <div *ngIf="newMaintenance.get('paperOrder')?.errors && newMaintenance.get('paperOrder')?.touched"  class="invalid-feedback">
+              <span  *ngIf="newMaintenance.get('paperOrder')?.getError('required')">{{ "USERITEMINFO.Required" | translate }}</span>  
+           </div>
+          </div>
+        </div>
+
+ 
+ 
+        <div class="text-end">
+          <button [disabled]="newMaintenance.invalid" class="btn btn-success mx-2">{{ "CONFIGPROFESSIONS.add" | translate }}</button>
+          <button class="btn btn-secondary" data-bs-dismiss="modal">{{ "CONFIGPROFESSIONS.cancel" | translate }}</button>
+        </div>
+       </form> 
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-------edit Modal ------------> 
+<div class="modal fade" id="editMaintenance" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal-dialog">
+  <div class="modal-content">
+    <div class="modal-header">
+      <h3 class="modal-title" id="exampleModalLabel"><i class="fas fa-edit"></i>  تعديل معدة</h3>
+      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+    </div>
+    <div class="modal-body">
+      <form [formGroup]="editMaintenance" (ngSubmit)="updateMaintenance()">
+       
+        <div class="mb-3 row">
+          <label for="name" class="col-sm-3 col-form-label">اسم المعدة</label>
+          <div class="col-sm-9">
+            <input [class.is-valid]="editMaintenance.get('name')?.status=='VALID'"
+              type="text" formControlName="name" class="form-control" id="name">
+              <div *ngIf="editMaintenance.get('name')?.errors && editMaintenance.get('name')?.touched" class="invalid-feedback">
+                <span *ngIf="editMaintenance.get('name')?.getError('required')">
+                this is required!</span>  
+           </div>
+          </div>
+        </div>
+
+        <div class="mb-3 row">
+          <label for="id" class="col-sm-3 col-form-label">رقم المعدة</label>
+          <div class="col-sm-9">
+            <input [class.is-valid]="editMaintenance.get('id')?.status=='VALID'"
+              type="text" formControlName="id" class="form-control" id="id">
+              <div *ngIf="editMaintenance.get('id')?.errors && editMaintenance.get('id')?.touched" class="invalid-feedback">
+                <span *ngIf="editMaintenance.get('id')?.getError('required')">
+                this is required!</span>  
+              </div>
+         </div>
+        </div>
+
+        <div class="mb-3 row">
+          <label for="type" class="col-sm-3 col-form-label">نوع المعدة</label>
+          <div class="col-sm-9">
+            <select [class.is-valid]="editMaintenance.get('type')?.status=='VALID'"
+            id="type" class="form-select" placeholder="Select Active or Deavtive" formControlName="type">    
+                 <option value="" selected> -- اختار --</option>
+                 <option [ngValue]="true"> خلاط </option>
+                 <option [ngValue]="false"> سيارة </option>
+            </select>
+            <div *ngIf="editMaintenance.get('type')?.errors && editMaintenance.get('type')?.touched"  class="invalid-feedback">
+              <span  *ngIf="editMaintenance.get('type')?.getError('required')">{{ "USERITEMINFO.Required" | translate }}</span>  
+           </div>
+          </div>
+        </div>
+
+     
+
+        <div class="mb-3 row">
+          <label for="driver" class="col-sm-3 col-form-label">  سائق المعدة </label>
+          <div class="col-sm-9">
+            <input [class.is-valid]="editMaintenance.get('driver')?.status=='VALID'"
+            type="text" formControlName="driver" class="form-control" id="driver">
+            <div *ngIf="editMaintenance.get('driver')?.errors && editMaintenance.get('driver')?.touched" class="invalid-feedback">
+              <span  *ngIf="editMaintenance.get('driver')?.getError('required')">this is required</span>  
+           </div>
+          </div>
+        </div>
+ 
+        <div class="mb-3 row">
+          <label for="spareParts" class="col-sm-3 col-form-label"> قطع الغيار المطلوبة </label>
+          <div class="col-sm-9">
+            <input [class.is-valid]="editMaintenance.get('spareParts')?.status=='VALID'"
+            type="text" formControlName="spareParts" class="form-control" id="spareParts">
+            <div *ngIf="editMaintenance.get('spareParts')?.errors && editMaintenance.get('spareParts')?.touched" class="invalid-feedback">
+              <span  *ngIf="editMaintenance.get('spareParts')?.getError('required')">this is required</span>  
+           </div>
+          </div>
+        </div>
+
+      
+        <div class="mb-3 row">
+          <label for="statusOrder" class="col-sm-3 col-form-label"> حالة الطلب</label>
+          <div class="col-sm-9">
+            <select [class.is-valid]="editMaintenance.get('statusOrder')?.status=='VALID'"
+            id="statusOrder" class="form-select" placeholder="" formControlName="statusOrder">    
+                 <option value="" selected> -- اختار --</option>
+                 <option [ngValue]="true"> ساري </option>
+                 <option [ngValue]="false"> متوقف </option>
+            </select>
+            <div *ngIf="editMaintenance.get('statusOrder')?.errors && editMaintenance.get('statusOrder')?.touched"  class="invalid-feedback">
+              <span  *ngIf="editMaintenance.get('statusOrder')?.getError('required')">{{ "USERITEMINFO.Required" | translate }}</span>  
+           </div>
+          </div>
+        </div>
+
+        <div class="mb-3 row">
+          <label for="paperOrder" class="col-sm-3 col-form-label"> صورة الطلب</label>
+          <div class="col-sm-9">
+            <input type="file" id="paperOrder" formControlName="paperOrder">
+            <div *ngIf="editMaintenance.get('paperOrder')?.errors && editMaintenance.get('paperOrder')?.touched"  class="invalid-feedback">
+              <span  *ngIf="editMaintenance.get('paperOrder')?.getError('required')">{{ "USERITEMINFO.Required" | translate }}</span>  
+           </div>
+          </div>
+        </div>
+
+      <div class="text-end">
+        <button [disabled]="editMaintenance.invalid" class="btn btn-success mx-2">تعديل</button>
+        <button class="btn btn-secondary" data-bs-dismiss="modal">{{ "CONFIGPROFESSIONS.cancel" | translate }}</button>
+      </div>
+     </form> 
+    </div>
+  </div>
+</div>
+</div>
+ 
+<!-------view Modal ------------> 
+<div class="modal fade" id="viewMaintenance" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal-dialog">
+  <div class="modal-content">
+    <div class="modal-header d-block">
+      <h3 class="text-center" id="exampleModalLabel"> طلب صيانة</h3> 
+    </div>
+
+    <div class="modal-body"> 
+
+    <div class="row">
+      
+      <div class="col-sm-6 mb-3 row">
+        <label for="id" class="col-sm-6 col-form-label">رقم المعدة</label>
+        <div class="col-sm-6">
+           <p>205 </p>
+         </div>
+      </div>
+  
+      <div class="col-sm-6 mb-3 row">
+        <label for="type" class="col-sm-6 col-form-label">اسم المعدة</label>
+        <div class="col-sm-6">
+           <p>معدة 1 </p>
+        </div>
+      </div>
+     </div>
+
+     <div class="row">
+      <div class="col-sm-6 mb-3 row">
+        <label for="type" class="col-sm-6 col-form-label">نوع المعدة</label>
+        <div class="col-sm-6">
+           <p>سيارة </p>
+        </div>
+      </div>
+
+      <div class="col-sm-6 mb-3 row">
+        <label for="empName" class="col-sm-5 col-form-label"> سائق المركبة </label>
+        <div class="col-sm-7">
+           <p>  عمرو ابراهيم محمود </p>
+        </div>
+      </div>
+    </div> 
+
+    <div class="row">
+      <div class="col-sm-6 mb-3 row">
+        <label for="type" class="col-sm-6 col-form-label">حالة الطلب</label>
+        <div class="col-sm-6">
+           <p>ساري </p>
+        </div>
+      </div>
+
+      <div class="col-sm-6 mb-3 row">
+        <label for="empName" class="col-sm-5 col-form-label"> صورة الطلب </label>
+        <div class="col-sm-7">
+           <img src="assets/images/small/img-7.jpg" alt="" width="50px">
+        </div>
+      </div>
+    </div> 
+
+    <div class="mb-3 row">
+      <label for="empName" class="col-sm-4 col-form-label"> قطع الغيار المطلوبة  </label>
+      <div class="col-sm-8">
+          <p>قطع الغيار المطلوبة 1 - قطع الغيار المطلوبة 2</p>
+      </div>
+    </div>
+
+      <div class="text-end"> 
+        <button class="btn btn-secondary w-100" data-bs-dismiss="modal">إغلاق</button>
+      </div>
+    
+  </div>
+</div>
+</div>
+ 

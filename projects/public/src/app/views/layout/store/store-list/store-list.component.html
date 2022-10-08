@@ -96,7 +96,7 @@
             <div class="col-sm-9">
               <select [class.is-valid]="newStore.get('type')?.status=='VALID'"
               id="type" class="form-select" placeholder="Select Active or Deavtive" formControlName="type">    
-                   <option value="" selected>نوع المخزون</option>
+                   <option value="" selected>-- اختار -- </option>
                    <option [ngValue]="true"> خلاط </option>
                    <option [ngValue]="false"> سيارة </option>
               </select>
@@ -155,7 +155,7 @@
           <div class="col-sm-9">
             <select [class.is-valid]="editStore.get('type')?.status=='VALID'"
             id="type" class="form-select" placeholder="Select Active or Deavtive" formControlName="type">    
-                 <option value="" selected>نوع المخزون</option>
+                 <option value="" selected> -- اختار --</option>
                  <option [ngValue]="true"> خلاط </option>
                  <option [ngValue]="false"> سيارة </option>
             </select>

@@ -4,6 +4,9 @@ import { CommonModule } from '@angular/common';
 import { VehiclesRoutingModule } from './vehicles-routing.module';
 import { VehicleComponent } from './vehicle/vehicle.component';
 import { VehicleListComponent } from './vehicle-list/vehicle-list.component';
+import { ReactiveFormsModule } from '@angular/forms';
+import { TranslateModule } from '@ngx-translate/core';
+import { NgxPaginationModule } from 'ngx-pagination';
 
 
 @NgModule({
@@ -13,7 +16,10 @@ import { VehicleListComponent } from './vehicle-list/vehicle-list.component';
   ],
   imports: [
     CommonModule,
-    VehiclesRoutingModule
+    VehiclesRoutingModule,
+    NgxPaginationModule,
+    TranslateModule,
+    ReactiveFormsModule
   ]
 })
 export class VehiclesModule { }
