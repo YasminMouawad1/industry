@@ -63,7 +63,7 @@
           <a
             routerLinkActive="active"
             class="side-nav-link-ref"
-            routerLink="reports-List"
+            routerLink="reports-List/"
             data-bs-toggle="collapse" data-bs-target="#reports"
           > <i class="fas fa-file"></i> <span> تقارير </span>
           </a>
@@ -73,42 +73,60 @@
             <a
               routerLinkActive="sub-active"
               class="side-nav-link-ref"
-              routerLink="pump-receipt">  محضر استلام مضخة 
+              routerLink="reports-List/report1"
+            >  تقرير 1
             </a>
           </li>
           <li>
             <a
               routerLinkActive="sub-active"
               class="side-nav-link-ref"
-              routerLink="mixer-receipt"
-            >  محضر استلام خلاطة
-            </a>
-          </li>
-          <li>
-            <a
-              routerLinkActive="sub-active"
-              class="side-nav-link-ref"
-              routerLink="car-receipt"
-            >  محضر استلام سيارة 
-            </a>
-          </li>
-          <li>
-            <a
-              routerLinkActive="sub-active"
-              class="side-nav-link-ref"
-              routerLink="custody-receipt"
-            >  نموذج استلام عهدة
-            </a>
-          </li>
-          <li>
-            <a
-              routerLinkActive="sub-active"
-              class="side-nav-link-ref"
-              routerLink="report-receipt"
-            >   استلام اغراض للعمال 
+              routerLink="reports-List/report2"
+            >    تقرير 2
             </a>
           </li>
       </ul>
+        <li>
+          <a
+            routerLinkActive="active"
+            class="side-nav-link-ref"
+            routerLink="pump-receipt" 
+          > <i class="fas fa-clipboard"></i><span> محضر استلام مضخة </span>
+          </a>
+        </li> 
+        <li>
+          <a
+            routerLinkActive="active"
+            class="side-nav-link-ref"
+            routerLink="mixer-receipt" 
+          > <i class="fas fa-clipboard"></i> <span> محضر استلام خلاطة </span>
+          </a>
+        </li>
+         <li>
+          <a
+            routerLinkActive="active"
+            class="side-nav-link-ref"
+            routerLink="car-receipt" 
+          > <i class="fas fa-clipboard"></i><span> محضر استلام سيارة </span>
+          </a>
+        </li> 
+        <li>
+          <a
+            routerLinkActive="active"
+            class="side-nav-link-ref"
+            routerLink="custody-receipt" 
+          > <i class="fas fa-clipboard"></i><span> نموذج استلام عهدة </span>
+          </a>
+        </li> 
+        <li>
+          <a
+            routerLinkActive="active"
+            class="side-nav-link-ref"
+            routerLink="report-receipt" 
+          > <i class="fas fa-clipboard"></i> <span> استلام اغراض للعمال </span>
+          </a>
+        </li> 
+       
 
     </ng-container>
     </ul>

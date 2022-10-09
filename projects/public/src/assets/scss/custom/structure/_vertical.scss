@@ -42,7 +42,7 @@
   position: fixed;
   top: $header-height;
   box-shadow: $box-shadow;
-  background-color: #16213e !important;
+  background-color: #e7e9eb !important;
 }
 
 .main-content {
@@ -58,6 +58,7 @@
 
 #sidebar-menu {
   padding: 10px 0 30px 0;
+  padding-top: 4rem;
 
   .mm-active {
     >.has-arrow {
@@ -85,9 +86,9 @@
         padding: .625rem 1.5rem;
         // color: $sidebar-menu-item-color;
         position: relative;
-        font-size: 13px;
+        font-size: 14px;
         transition: all .4s;
-        color: #fff !important;
+        color: #3c4459;
 
         i {
           display: inline-block;
@@ -98,7 +99,7 @@
           vertical-align: middle;
           // color: $sidebar-menu-item-icon-color;
           transition: all .4s;
-          color: #fff !important;
+          color: #3c4459 !important;
         }
 
         &:hover {
