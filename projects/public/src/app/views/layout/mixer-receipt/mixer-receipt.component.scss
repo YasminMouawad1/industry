@@ -19,3 +19,17 @@ h2{
     border-radius: 12px;
     margin-top: 27px;
 }
+
+.delBroder,
+.cardFooter input{
+    border: none;
+    border-bottom: 1px solid #ddd;
+    background-color: transparent;
+}
+
+.borderContain{
+    border: 1px solid #ddd;
+    border-radius: 12px;
+    padding: 1.4rem 0.5rem;
+}
+ 

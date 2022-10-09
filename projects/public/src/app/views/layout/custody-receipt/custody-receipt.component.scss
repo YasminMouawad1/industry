@@ -17,5 +17,31 @@ h2{
     background-color: #f6f6f9;
     border: 1px solid #ddd;
     border-radius: 12px;
-    margin-top: 27px;
+    margin-top: 3rem;
+}
+
+input{
+    border: none;
+    border-bottom: 1px solid #ddd;
+    background-color: transparent;
+}
+ 
+.btn_plus{
+    border: 1px solid #ddd;
+    background-color: transparent;
+    width: 38px;
+    height: 38px;
+    cursor: pointer;
+    color: #292727;
+    border-radius: 50%;
+    margin-top: 2rem;
+}
+
+.borderContain{
+    border: 1px solid #ddd;
+    border-radius: 12px;
+    padding: 1.4rem 0.5rem;
+}
+.inputBorder{
+    border: 1px solid #ddd;
 }
