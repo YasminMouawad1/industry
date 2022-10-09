@@ -13,7 +13,14 @@ import { TranslateModule } from '@ngx-translate/core';
 import { HttpClient } from '@angular/common/http';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { SpinnerComponent } from './spinner/spinner.component';
+import { PumpReceiptComponent } from './pump-receipt/pump-receipt.component';
+import { MixerReceiptComponent } from './mixer-receipt/mixer-receipt.component';
+import { CarReceiptComponent } from './car-receipt/car-receipt.component';
+import { CustodyReceiptComponent } from './custody-receipt/custody-receipt.component';
+import { ReportReceiptComponent } from './report-receipt/report-receipt.component';
  
+ 
+
 export function createTranslateLoader(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
 }
@@ -26,7 +33,12 @@ export function createTranslateLoader(http: HttpClient) {
     TopbarComponent,
     SidebarComponent,
     RightsidebarComponent,
-    SpinnerComponent
+    SpinnerComponent,
+    PumpReceiptComponent,
+    MixerReceiptComponent,
+    CarReceiptComponent,
+    CustodyReceiptComponent,
+    ReportReceiptComponent
   ],
   imports: [
     CommonModule,
@@ -36,8 +48,7 @@ export function createTranslateLoader(http: HttpClient) {
     NgbDatepickerModule,
     NgbTimepickerModule,
     SimplebarAngularModule,
-    TranslateModule
-
+    TranslateModule,
   ]
 })
 export class LayoutModule { }

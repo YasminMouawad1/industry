@@ -6,13 +6,11 @@
 .sun-menu{
     padding: 0rem .4rem;
 }
-
-.sun-menu li a,
-.sun-menu li a i{
-    font-size: 11px !important; 
+ 
+ 
+ 
+#side-menu li a.sub-active{ 
+   color:#3c4459 !important;
 }
 
-#side-menu li a.sub-active{
-    background-color: #48526b;
-   // color: #48526b  !important;
-}
+ 

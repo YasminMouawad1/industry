@@ -64,14 +64,51 @@
             routerLinkActive="active"
             class="side-nav-link-ref"
             routerLink="reports-List"
-          >
-          <i class="fas fa-file"></i>
-            <span>
-              تقارير
-            </span>
+            data-bs-toggle="collapse" data-bs-target="#reports"
+          > <i class="fas fa-file"></i> <span> تقارير </span>
           </a>
         </li> 
-
+        <ul class="collapse sun-menu" id="reports">
+          <li>
+            <a
+              routerLinkActive="sub-active"
+              class="side-nav-link-ref"
+              routerLink="pump-receipt">  محضر استلام مضخة 
+            </a>
+          </li>
+          <li>
+            <a
+              routerLinkActive="sub-active"
+              class="side-nav-link-ref"
+              routerLink="mixer-receipt"
+            >  محضر استلام خلاطة
+            </a>
+          </li>
+          <li>
+            <a
+              routerLinkActive="sub-active"
+              class="side-nav-link-ref"
+              routerLink="car-receipt"
+            >  محضر استلام سيارة 
+            </a>
+          </li>
+          <li>
+            <a
+              routerLinkActive="sub-active"
+              class="side-nav-link-ref"
+              routerLink="custody-receipt"
+            >  نموذج استلام عهدة
+            </a>
+          </li>
+          <li>
+            <a
+              routerLinkActive="sub-active"
+              class="side-nav-link-ref"
+              routerLink="report-receipt"
+            >   استلام اغراض للعمال 
+            </a>
+          </li>
+      </ul>
 
     </ng-container>
     </ul>
