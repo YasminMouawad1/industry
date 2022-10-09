@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router'; 
 import { CarReceiptComponent } from './car-receipt/car-receipt.component';
 import { CustodyReceiptComponent } from './custody-receipt/custody-receipt.component';
+import { HtmlToPdfMakeComponent } from './html-to-pdf-make/html-to-pdf-make.component';
 import { LayoutComponent } from './layout.component';
 import { MixerReceiptComponent } from './mixer-receipt/mixer-receipt.component';
 import { PumpReceiptComponent } from './pump-receipt/pump-receipt.component';
@@ -24,6 +25,7 @@ const routes: Routes = [{
     { path: 'car-receipt', component:CarReceiptComponent},
     {path:'custody-receipt',component:CustodyReceiptComponent},
     {path:'report-receipt',component:ReportReceiptComponent},
+    {path:'html-to-pdf',component:HtmlToPdfMakeComponent},
   ]
 },
 ];

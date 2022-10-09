@@ -18,6 +18,7 @@ import { MixerReceiptComponent } from './mixer-receipt/mixer-receipt.component';
 import { CarReceiptComponent } from './car-receipt/car-receipt.component';
 import { CustodyReceiptComponent } from './custody-receipt/custody-receipt.component';
 import { ReportReceiptComponent } from './report-receipt/report-receipt.component';
+import { HtmlToPdfMakeComponent } from './html-to-pdf-make/html-to-pdf-make.component';
  
  
 
@@ -38,7 +39,8 @@ export function createTranslateLoader(http: HttpClient) {
     MixerReceiptComponent,
     CarReceiptComponent,
     CustodyReceiptComponent,
-    ReportReceiptComponent
+    ReportReceiptComponent,
+    HtmlToPdfMakeComponent
   ],
   imports: [
     CommonModule,
