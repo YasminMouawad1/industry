@@ -6,7 +6,10 @@ export const environment = {
   production: false,
   language:'ar',
   //apiRoot:'https://prod-midtakseet-webservice.midtakseet.com'
-  apiRoot:'http://102.217.68.59:8080'
+  apiRoot:'http://102.217.68.59:8080',
+  recaptcha: {
+    siteKey: '6LeSK3UiAAAAAF1IWEUnl3dukOjVE_NdTXPY7XP-',
+  },
 
 };
 

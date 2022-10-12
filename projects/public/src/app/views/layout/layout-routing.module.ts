@@ -6,7 +6,7 @@ import { HtmlToPdfMakeComponent } from './html-to-pdf-make/html-to-pdf-make.comp
 import { LayoutComponent } from './layout.component';
 import { MixerReceiptComponent } from './mixer-receipt/mixer-receipt.component';
 import { PumpReceiptComponent } from './pump-receipt/pump-receipt.component';
-import { ReportReceiptComponent } from './report-receipt/report-receipt.component';
+import { ReportReceiptComponent } from './report-receipt/report-receipt.component'; 
 
 const routes: Routes = [{
   path: '', component: LayoutComponent, children: [
@@ -25,7 +25,7 @@ const routes: Routes = [{
     { path: 'car-receipt', component:CarReceiptComponent},
     {path:'custody-receipt',component:CustodyReceiptComponent},
     {path:'report-receipt',component:ReportReceiptComponent},
-    {path:'html-to-pdf',component:HtmlToPdfMakeComponent},
+    {path:'html-to-pdf',component:HtmlToPdfMakeComponent}, 
   ]
 },
 ];

@@ -2,19 +2,28 @@
     <h2> محضر استلام اغراض للعمال</h2>
 
 <div class="container-fluid">
+    <form #form="ngForm">
     <div class="borderContain">
     <div class="row mb-3">
         <div class="col-md-6 row">
             <label class="col-md-4 "> التاريخ  </label>
             <div class="col-md-8">
-                <input type="date" class="form-control" id="name">
-            </div>
+                <input id="date" name="date" type="date" class="form-control" required  ngModel required #date="ngModel"
+                 [class.is-invalid]="date.invalid && (date.dirty || date.touched)"> 
+                 <div *ngIf="date.invalid && (date.dirty || date.touched)" class="invalid-feedback">
+                    <div *ngIf="date.errors?.['required']">مطلوب ادخاله </div>
+                  </div>    
+           </div>
         </div>
-    
+
         <div class="col-md-6 row">
             <label class="col-md-4">اسم الموظف</label>
             <div class="col-md-8">
-                <input type="text" class="form-control" id="name">
+                <input id="empName" name="empName" type="text" class="form-control" required  ngModel required #empName="ngModel"
+                [class.is-invalid]="empName.invalid && (empName.dirty || empName.touched)">
+                <div *ngIf="empName.invalid && (empName.dirty || empName.touched)" class="invalid-feedback">
+                    <div *ngIf="empName.errors?.['required']">مطلوب ادخاله </div>
+                </div>  
             </div> 
         </div>
      </div>
@@ -22,14 +31,22 @@
         <div class="col-md-6 row">
             <label class="col-md-4"> الكود </label>
             <div class="col-md-8">
-                <input type="text" class="form-control" id="name">
+                <input id="code" name="code" type="text" class="form-control" required  ngModel required #code="ngModel"
+                [class.is-invalid]="code.invalid && (code.dirty || code.touched)">
+                <div *ngIf="code.invalid && (code.dirty || code.touched)" class="invalid-feedback">
+                    <div *ngIf="code.errors?.['required']">مطلوب ادخاله </div>
+                </div> 
             </div>
         </div>
     
         <div class="col-md-6 row">
             <label class="col-md-4">القسم / مكان العمل   </label>
             <div class="col-md-8">
-                <input type="text" class="form-control" id="name">
+                <input id="section" name="section" type="text" class="form-control" required  ngModel required #section="ngModel"
+                [class.is-invalid]="section.invalid && (section.dirty || section.touched)">
+                <div *ngIf="section.invalid && (section.dirty || section.touched)" class="invalid-feedback">
+                    <div *ngIf="section.errors?.['required']">مطلوب ادخاله </div>
+                </div> 
             </div>
         </div>
      </div>
@@ -37,22 +54,38 @@
      <div class="row mb-3">
         <div class="col-md-12 row">
             <label class="col-md-2"> بيان بالعهدة </label>
-            <div class="col-md-10">
-                <textarea class="form-control" rows="6"></textarea>
+            <div class="col-md-10"> 
+                <textarea id="details" name="details" rows="6" class="form-control" required  ngModel required #details="ngModel"
+                [class.is-invalid]="details.invalid && (details.dirty || details.touched)"></textarea>
+                <div *ngIf="details.invalid && (details.dirty || details.touched)" class="invalid-feedback">
+                    <div *ngIf="details.errors?.['required']">مطلوب ادخاله </div>
+                </div> 
             </div>
         </div>
     
      </div>
  
-    </div>
-
-
-
-    
+    </div> 
    <div class="container w-50 text-center cardFooter"> 
-            <label class="col-md-4"> توقيع المستلم  </label> 
-            <input type="text" class="form-control" id="name">
+            <label class="col-md-4"> توقيع المستلم  </label>  
+            <input id="Signature" name="Signature" type="text" class="form-control" required  ngModel required #Signature="ngModel"
+                [class.is-invalid]="Signature.invalid && (Signature.dirty || Signature.touched)">
+                <div *ngIf="Signature.invalid && (Signature.dirty || Signature.touched)" class="invalid-feedback">
+                    <div *ngIf="Signature.errors?.['required']">مطلوب ادخاله </div>
+                </div> 
     </div>
-    
+
+    <div class="row mt-3">
+        <div class=" col-sm-12 mb-2">
+            <re-captcha id="recaptcha" name="recaptcha" #recaptcha="ngModel" [(ngModel)]="token" required [class.is-invalid]="recaptcha.invalid && (recaptcha.dirty || recaptcha.touched)"></re-captcha>
+            <div *ngIf="recaptcha.invalid && (recaptcha.dirty || recaptcha.touched)" class="invalid-feedback">
+              <div *ngIf="recaptcha.errors?.['required']">مطلوب ادخاله</div>
+            </div>
+          </div>
+    </div>
+
+    <button class="btn btn-primary" type="submit" (click)="send(form)"> Send</button>
+
+    </form>
    </div>
 </div>

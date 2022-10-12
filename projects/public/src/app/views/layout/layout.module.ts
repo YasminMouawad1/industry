@@ -18,8 +18,13 @@ import { MixerReceiptComponent } from './mixer-receipt/mixer-receipt.component';
 import { CarReceiptComponent } from './car-receipt/car-receipt.component';
 import { CustodyReceiptComponent } from './custody-receipt/custody-receipt.component';
 import { ReportReceiptComponent } from './report-receipt/report-receipt.component';
-import { HtmlToPdfMakeComponent } from './html-to-pdf-make/html-to-pdf-make.component';
- 
+import { HtmlToPdfMakeComponent } from './html-to-pdf-make/html-to-pdf-make.component'; 
+
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { RECAPTCHA_SETTINGS, RecaptchaFormsModule, RecaptchaModule, RecaptchaSettings } from 'ng-recaptcha';
+import { environment } from 'projects/public/src/environments/environment';
+import { RecaptchaComponent } from './recaptcha/recaptcha.component';
+
  
 
 export function createTranslateLoader(http: HttpClient) {
@@ -40,17 +45,30 @@ export function createTranslateLoader(http: HttpClient) {
     CarReceiptComponent,
     CustodyReceiptComponent,
     ReportReceiptComponent,
-    HtmlToPdfMakeComponent
+    HtmlToPdfMakeComponent, 
+    RecaptchaComponent
   ],
-  imports: [
-    CommonModule,
+  imports: [ 
+CommonModule,
     LayoutRoutingModule,
     NgbDropdownModule,
     NgbCollapseModule,
     NgbDatepickerModule,
     NgbTimepickerModule,
     SimplebarAngularModule,
-    TranslateModule,
+    TranslateModule ,
+    FormsModule, 
+    RecaptchaModule,
+    RecaptchaFormsModule,
+    ReactiveFormsModule
+  ],
+  providers:[
+    {
+      provide: RECAPTCHA_SETTINGS,
+      useValue: {
+        siteKey: environment.recaptcha.siteKey,
+      } as RecaptchaSettings,
+    },
   ]
 })
 export class LayoutModule { }

@@ -17,8 +17,7 @@ import { CarouselModule } from 'ngx-owl-carousel-o';
  
 import { LightboxModule } from 'ngx-lightbox';
 import { AuthInterceptorService } from './core/services/interceptor/auth-interceptor.service';
-import { NgbAccordionModule, NgbModule, NgbNavModule, NgbTooltipModule } from '@ng-bootstrap/ng-bootstrap';
-
+import { NgbAccordionModule, NgbModule, NgbNavModule, NgbTooltipModule } from '@ng-bootstrap/ng-bootstrap'; 
 // AoT requires an exported function for factories
 export function createTranslateLoader(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -29,7 +28,7 @@ const ngWizardConfig: NgWizardConfig = {
 };
 @NgModule({
   declarations: [
-    AppComponent, 
+    AppComponent 
   ],
   imports: [
     BrowserModule,
